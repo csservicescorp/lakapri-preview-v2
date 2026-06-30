@@ -876,5 +876,78 @@ img{display:block;max-width:100%;}
 
 </div><!-- /pg2 -->
 
+<style>
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  will-change: opacity, transform;
+  transition: opacity 0.65s cubic-bezier(.22,.61,.36,1), transform 0.65s cubic-bezier(.22,.61,.36,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* staggered children inside a reveal-group */
+.reveal-group > * {
+  opacity: 0;
+  transform: translateY(22px);
+  will-change: opacity, transform;
+  transition: opacity 0.55s cubic-bezier(.22,.61,.36,1), transform 0.55s cubic-bezier(.22,.61,.36,1);
+}
+.reveal-group.visible > *:nth-child(1) { transition-delay: 0s; }
+.reveal-group.visible > *:nth-child(2) { transition-delay: 0.09s; }
+.reveal-group.visible > *:nth-child(3) { transition-delay: 0.18s; }
+.reveal-group.visible > *:nth-child(4) { transition-delay: 0.27s; }
+.reveal-group.visible > *:nth-child(5) { transition-delay: 0.36s; }
+.reveal-group.visible > *:nth-child(6) { transition-delay: 0.45s; }
+.reveal-group.visible > * { opacity: 1; transform: translateY(0); }
+</style>
+
+<script>
+(function () {
+  const io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07 });
+
+  /* single reveal elements */
+  document.querySelectorAll([
+    '.hero-copy',
+    '.cat-strip > *',
+    '.editorial-break .eb-content',
+    '.pro-section',
+    '.pro-cards > .pro-card',
+    '.pb-section',
+    '.edu-section',
+    '.footer-cta > *',
+    '.sc-copy',
+    '.pc-item',
+    '.grw-copy',
+    '.grw-img',
+    '.lh',
+  ].join(',')).forEach(function (el) {
+    el.classList.add('reveal');
+    io.observe(el);
+  });
+
+  /* staggered groups */
+  document.querySelectorAll([
+    '.cat-grid',
+    '.pc-list',
+    '.grw-prods',
+    '.pro-cards',
+    '.footer-links',
+  ].join(',')).forEach(function (el) {
+    el.classList.add('reveal-group');
+    io.observe(el);
+  });
+})();
+</script>
+
 </body>
 </html>

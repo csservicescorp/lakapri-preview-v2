@@ -917,47 +917,47 @@ img{display:block;max-width:100%;}
     '.cat-grid','.pc-list','.grw-prods','.pro-cards','.footer-links',
   ].join(',');
 
-  function show(el) { el.classList.add('visible'); }
+  var all = [];
 
-  function checkInView() {
-    document.querySelectorAll('.reveal:not(.visible),.reveal-group:not(.visible)').forEach(function(el) {
-      var r = el.getBoundingClientRect();
-      if (r.top < window.innerHeight + 60 && r.bottom > -60) show(el);
-    });
+  function check() {
+    var vh = window.innerHeight;
+    var remaining = [];
+    for (var i = 0; i < all.length; i++) {
+      var el = all[i];
+      if (el.getBoundingClientRect().top < vh * 1.1) {
+        el.classList.add('visible');
+      } else {
+        remaining.push(el);
+      }
+    }
+    all = remaining;
+    if (all.length === 0) {
+      window.removeEventListener('scroll', check);
+    }
   }
-
-  var io = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) { show(e.target); io.unobserve(e.target); }
-    });
-  }, { threshold: 0 });
 
   function init() {
     document.querySelectorAll(SINGLE).forEach(function(el) {
-      el.classList.add('reveal'); io.observe(el);
+      el.classList.add('reveal');
+      all.push(el);
     });
     document.querySelectorAll(GROUP).forEach(function(el) {
-      el.classList.add('reveal-group'); io.observe(el);
+      el.classList.add('reveal-group');
+      all.push(el);
     });
-    /* iOS Safari bug: observer may not fire at y=0 — delay check */
-    requestAnimationFrame(function() {
-      requestAnimationFrame(checkInView);
-    });
+    check(); /* trigger immediately for above-fold elements */
   }
 
-  if (document.readyState === 'complete') {
-    init();
+  /* scroll fires on desktop + Android; touchmove fires on iOS during momentum */
+  window.addEventListener('scroll', check, { passive: true });
+  window.addEventListener('touchmove', check, { passive: true });
+  window.addEventListener('touchend', check, { passive: true });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
   } else {
-    window.addEventListener('load', init);
+    init();
   }
-
-  /* scroll fallback for missed elements */
-  window.addEventListener('scroll', checkInView, { passive: true });
-
-  /* hard fallback: show everything after 1.5s regardless */
-  setTimeout(function() {
-    document.querySelectorAll('.reveal:not(.visible),.reveal-group:not(.visible)').forEach(show);
-  }, 1500);
 })();
 </script>
 

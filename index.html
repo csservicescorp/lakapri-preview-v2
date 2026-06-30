@@ -88,16 +88,29 @@ img{display:block;max-width:100%;}
 
 .sitenav{
   position:relative;z-index:20;
-  display:flex;justify-content:space-between;align-items:center;
+  display:block;
   padding:clamp(14px,2.2vw,22px) clamp(16px,4vw,48px);
   border-bottom:1px solid var(--w02);
   background:var(--ink);
-  gap:16px;
 }
+.nav-brand-center{font-size:clamp(.7rem,1vw,.84rem);}
+.nav-bottom-row{display:flex;justify-content:space-between;align-items:center;}
 .nav-links{display:flex;gap:clamp(12px,2vw,28px);}
 .nav-links span{font-size:clamp(.38rem,.58vw,.48rem);letter-spacing:.25em;text-transform:uppercase;color:var(--w5);font-weight:200;white-space:nowrap;cursor:pointer;}
-@media(max-width:560px){.nav-links{display:none;}}
 .nav-right{display:flex;gap:clamp(8px,1.5vw,16px);align-items:center;flex-shrink:0;}
+
+@media(max-width:560px){
+  .sitenav{padding:10px clamp(16px,4vw,32px);}
+  .nav-brand-center{
+    position:static !important;
+    transform:none !important;
+    display:block;
+    text-align:center;
+    margin-bottom:8px;
+  }
+  .nav-bottom-row{justify-content:center;gap:clamp(8px,3vw,14px);flex-wrap:wrap;}
+  .nav-links{gap:clamp(8px,2vw,14px);}
+}
 
 /* ═══════════════════════════
    HERO — mobile-first stack
@@ -460,15 +473,17 @@ img{display:block;max-width:100%;}
 
 <!-- NAV -->
 <div class="sitenav">
-  <div class="nav-links">
-    <span>Shop</span><span>Brands</span><span>LAKAPRI Pro</span><span>Education</span><span>Wholesale</span>
-  </div>
-  <div class="lakapri-name-nav" style="font-size:clamp(.7rem,1vw,.84rem);position:absolute;left:50%;transform:translateX(-50%);">LAKAPRI</div>
-  <div class="nav-right">
-    <span style="font-size:12px;color:var(--w3);">🔍</span>
-    <span style="font-size:12px;color:var(--w3);">♡</span>
-    <span style="font-size:12px;color:var(--w3);">◻</span>
-    <button class="btn-p" style="padding:7px 14px;font-size:clamp(.36rem,.52vw,.46rem);">Pro Access</button>
+  <div class="lakapri-name-nav nav-brand-center" style="position:absolute;left:50%;transform:translateX(-50%);">LAKAPRI</div>
+  <div class="nav-bottom-row">
+    <div class="nav-links">
+      <span>Shop</span><span>Brands</span><span>LAKAPRI Pro</span><span>Education</span><span>Wholesale</span>
+    </div>
+    <div class="nav-right">
+      <span style="font-size:12px;color:var(--w3);">🔍</span>
+      <span style="font-size:12px;color:var(--w3);">♡</span>
+      <span style="font-size:12px;color:var(--w3);">◻</span>
+      <button class="btn-p" style="padding:7px 14px;font-size:clamp(.36rem,.52vw,.46rem);">Pro Access</button>
+    </div>
   </div>
 </div>
 

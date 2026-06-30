@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>LAKAPRI — Professional Beauty Supply · Concept Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&family=Jost:wght@100;200;300;400;500&family=Outfit:wght@100;200;300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#060606; --ink1:#0d0d0d; --ink2:#141414; --ink3:#1c1c1c;
+  --ch:#c9a96e; --ch2:#dfc99a; --ch3:rgba(201,169,110,.3);
+  --ch1:rgba(201,169,110,.12); --ch0:rgba(201,169,110,.05);
+  --w:#f5f2ee; --w8:rgba(245,242,238,.8); --w5:rgba(245,242,238,.5);
+  --w3:rgba(245,242,238,.3); --w1:rgba(245,242,238,.1);
+  --w05:rgba(245,242,238,.05); --w02:rgba(245,242,238,.02);
+}
+
+/* ── LAKAPRI BRAND NAME TYPOGRAPHY ──
+   Mimics Avenir Next Ultra Light / Helvetica Neue UltraLight
+   Ultra-thin, wide tracking, all-caps — no bold, no serif */
+.lakapri-name {
+  font-family: 'Outfit', 'Jost', -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  letter-spacing: .55em;
+  text-transform: uppercase;
+  font-style: normal;
+  line-height: 1;
+  color: var(--w);
+}
+/* Larger display version — hero, covers */
+.lakapri-name-lg {
+  font-family: 'Outfit', 'Jost', -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  letter-spacing: .5em;
+  text-transform: uppercase;
+  font-style: normal;
+  line-height: 1;
+  color: var(--w);
+}
+/* Navigation version — compact */
+.lakapri-name-nav {
+  font-family: 'Outfit', 'Jost', -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  letter-spacing: .6em;
+  text-transform: uppercase;
+  font-style: normal;
+  line-height: 1;
+  color: var(--w);
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;}
+body{background:var(--ink);color:var(--w);font-family:'Jost',sans-serif;font-weight:200;-webkit-font-smoothing:antialiased;}
+img{display:block;max-width:100%;}
+
+/* PAGE WATERMARK */
+.pg{position:relative;width:100%;overflow:hidden;display:flex;flex-direction:column;}
+.pg+.pg{border-top:1px solid var(--w02);}
+.pg::after{content:'CONCEPT PREVIEW — NOT FINAL ARTWORK';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:clamp(9px,1vw,12px);font-weight:200;letter-spacing:.32em;color:rgba(201,169,110,.055);white-space:nowrap;pointer-events:none;z-index:500;transform:rotate(-28deg);}
+
+/* TYPE */
+.t-store{font-family:'Outfit','Jost',-apple-system,'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:100;font-size:clamp(.58rem,.85vw,.72rem);letter-spacing:.55em;text-transform:uppercase;color:var(--w);}
+.t-lbl{font-family:'Jost',sans-serif;font-weight:200;font-size:clamp(.44rem,.68vw,.56rem);letter-spacing:.5em;text-transform:uppercase;color:var(--ch);}
+.t-micro{font-family:'Jost',sans-serif;font-weight:200;font-size:clamp(.38rem,.56vw,.48rem);letter-spacing:.36em;text-transform:uppercase;color:rgba(201,169,110,.38);}
+.dp{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;line-height:1.05;color:var(--w);}
+.dp-up{font-family:'Playfair Display',serif;font-weight:500;line-height:1.04;color:var(--w);}
+.body{font-family:'Jost',sans-serif;font-weight:200;font-size:clamp(.68rem,1.05vw,.82rem);line-height:2;letter-spacing:.04em;color:var(--w5);}
+.lh{height:1px;background:linear-gradient(90deg,transparent,var(--ch3),transparent);}
+.lhl{height:1px;background:linear-gradient(90deg,var(--ch3),transparent);}
+.lv{width:1px;background:linear-gradient(180deg,transparent,var(--ch3),transparent);}
+
+/* BUTTONS */
+.btn-p{display:inline-flex;align-items:center;justify-content:center;padding:clamp(12px,1.8vw,16px) clamp(22px,3.2vw,36px);background:linear-gradient(135deg,#c9a96e,#b8943e);color:var(--ink);font-family:'Jost',sans-serif;font-weight:400;font-size:clamp(.44rem,.66vw,.56rem);letter-spacing:.44em;text-transform:uppercase;cursor:pointer;border:none;white-space:nowrap;}
+.btn-g{display:inline-flex;align-items:center;justify-content:center;padding:clamp(11px,1.6vw,15px) clamp(18px,2.8vw,30px);border:1px solid var(--ch3);color:var(--ch2);font-family:'Jost',sans-serif;font-weight:200;font-size:clamp(.44rem,.66vw,.56rem);letter-spacing:.4em;text-transform:uppercase;cursor:pointer;background:none;white-space:nowrap;}
+.btn-w{display:inline-flex;align-items:center;justify-content:center;padding:clamp(10px,1.5vw,14px) clamp(16px,2.5vw,26px);border:1px solid var(--w1);color:var(--w5);font-family:'Jost',sans-serif;font-weight:200;font-size:clamp(.42rem,.62vw,.52rem);letter-spacing:.35em;text-transform:uppercase;cursor:pointer;background:none;white-space:nowrap;}
+
+/* ═══════════════════════════
+   TOPBAR + NAV (mobile-first)
+═══════════════════════════ */
+.topbar{
+  display:flex;justify-content:center;align-items:center;
+  padding:9px clamp(16px,4vw,40px);
+  background:var(--ink1);
+  border-bottom:1px solid var(--w02);
+  position:relative;z-index:20;
+}
+.topbar-msg{font-size:clamp(.36rem,.52vw,.46rem);letter-spacing:.28em;text-transform:uppercase;color:var(--w3);font-weight:200;text-align:center;}
+
+.sitenav{
+  position:relative;z-index:20;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:clamp(14px,2.2vw,22px) clamp(16px,4vw,48px);
+  border-bottom:1px solid var(--w02);
+  background:var(--ink);
+  gap:16px;
+}
+.nav-links{display:flex;gap:clamp(12px,2vw,28px);}
+.nav-links span{font-size:clamp(.38rem,.58vw,.48rem);letter-spacing:.25em;text-transform:uppercase;color:var(--w5);font-weight:200;white-space:nowrap;cursor:pointer;}
+@media(max-width:560px){.nav-links{display:none;}}
+.nav-right{display:flex;gap:clamp(8px,1.5vw,16px);align-items:center;flex-shrink:0;}
+
+/* ═══════════════════════════
+   HERO — mobile-first stack
+═══════════════════════════ */
+.hero{
+  position:relative;
+  display:flex;flex-direction:column;
+  background:var(--ink);
+}
+/* on desktop: side by side */
+@media(min-width:700px){
+  .hero{display:grid;grid-template-columns:1fr 1fr;min-height:clamp(520px,75vw,820px);}
+}
+.hero-copy{
+  padding:clamp(40px,7vw,90px) clamp(16px,5vw,64px);
+  display:flex;flex-direction:column;justify-content:center;gap:clamp(16px,2.8vw,26px);
+  order:1;
+}
+@media(min-width:700px){.hero-copy{order:0;}}
+.hero-img{
+  position:relative;overflow:hidden;
+  min-height:clamp(280px,55vw,680px);
+  order:0;
+}
+@media(min-width:700px){.hero-img{order:1;min-height:unset;}}
+.hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:brightness(.82) contrast(1.06);}
+.hero-img::before{content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(0deg,var(--ink) 0%,transparent 30%,transparent 80%,var(--ink) 100%);
+}
+@media(min-width:700px){
+  .hero-img::before{
+    background:linear-gradient(90deg,var(--ink) 0%,rgba(6,6,6,.08) 28%,transparent 50%),
+               linear-gradient(0deg,var(--ink) 0%,transparent 15%,transparent 88%,var(--ink) 100%);
+  }
+}
+
+/* ═══════════════════════════
+   SHOP BY CATEGORY — text only
+═══════════════════════════ */
+.cat-strip{
+  padding:clamp(40px,6vw,64px) clamp(16px,4vw,48px);
+  display:flex;flex-direction:column;gap:clamp(22px,3.5vw,32px);
+  background:var(--ink1);
+}
+.cat-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--ch1);
+}
+@media(min-width:640px){.cat-grid{grid-template-columns:repeat(6,1fr);}}
+.cat-item{
+  background:var(--ink1);
+  padding:clamp(18px,3vw,28px) clamp(12px,2vw,20px);
+  display:flex;flex-direction:column;gap:6px;
+  cursor:pointer;transition:background .22s;
+}
+.cat-item:hover{background:var(--ink2);}
+.cat-num{font-size:clamp(.38rem,.54vw,.48rem);letter-spacing:.2em;color:rgba(201,169,110,.3);font-weight:200;}
+.cat-nm{font-size:clamp(.44rem,.68vw,.56rem);letter-spacing:.28em;text-transform:uppercase;color:var(--w5);font-weight:200;line-height:1.5;}
+.cat-item:hover .cat-nm{color:var(--ch);}
+.cat-arrow{font-size:10px;color:rgba(201,169,110,.25);margin-top:2px;}
+
+/* ═══════════════════════════
+   PRIVATE LABEL FEATURE
+═══════════════════════════ */
+.plf{
+  display:flex;flex-direction:column;background:var(--ink);
+}
+@media(min-width:700px){
+  .plf{display:grid;grid-template-columns:1fr 1fr;min-height:clamp(420px,60vw,700px);}
+}
+.plf-img{position:relative;overflow:hidden;min-height:clamp(280px,50vw,560px);}
+.plf-img img{width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:brightness(.8) contrast(1.08);}
+.plf-img::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(0deg,var(--ink) 0%,transparent 35%),
+             linear-gradient(180deg,var(--ink) 0%,transparent 20%);
+}
+@media(min-width:700px){
+  .plf-img::after{
+    background:linear-gradient(90deg,transparent 55%,var(--ink) 100%),
+               linear-gradient(0deg,var(--ink) 0%,transparent 14%,transparent 88%,var(--ink) 100%);
+  }
+}
+.plf-copy{
+  padding:clamp(36px,7vw,90px) clamp(16px,5vw,64px);
+  display:flex;flex-direction:column;justify-content:center;gap:clamp(16px,2.8vw,26px);
+  border-top:1px solid var(--w02);
+}
+@media(min-width:700px){.plf-copy{border-top:none;border-left:1px solid var(--w02);}}
+.private-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ch1);padding:5px 13px;max-width:fit-content;}
+.private-badge-dot{width:4px;height:4px;border-radius:50%;background:var(--ch);}
+.private-badge-txt{font-size:clamp(.36rem,.52vw,.46rem);letter-spacing:.36em;text-transform:uppercase;color:var(--ch);font-weight:200;}
+.detail-row{display:flex;flex-direction:column;gap:4px;padding-left:13px;border-left:1px solid var(--ch1);}
+.dr-k{font-size:clamp(.38rem,.55vw,.48rem);letter-spacing:.4em;text-transform:uppercase;color:var(--ch);font-weight:200;}
+.dr-v{font-family:'Playfair Display',serif;font-size:clamp(.82rem,1.52vw,1rem);color:var(--w);font-weight:400;}
+.dr-d{font-size:clamp(.58rem,.9vw,.7rem);color:var(--w5);font-weight:200;line-height:1.75;letter-spacing:.03em;}
+
+/* ═══════════════════════════
+   FEATURED PRODUCT
+═══════════════════════════ */
+.featured{
+  padding:clamp(48px,7vw,90px) clamp(16px,4vw,48px);
+  background:var(--ink1);
+  display:flex;flex-direction:column;gap:clamp(32px,5vw,48px);
+}
+.fp-main{
+  display:flex;flex-direction:column;gap:clamp(24px,4vw,44px);
+}
+@media(min-width:700px){
+  .fp-main{display:grid;grid-template-columns:1fr 2fr;align-items:center;gap:clamp(24px,4vw,52px);}
+}
+.fp-img-wrap{
+  position:relative;aspect-ratio:3/4;overflow:hidden;
+  background:var(--ink);border:1px solid var(--ch1);
+  max-width:320px;width:100%;margin:0 auto;
+}
+@media(min-width:700px){.fp-img-wrap{max-width:none;margin:0;}}
+.fp-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center 15%;filter:brightness(.9) contrast(1.06);}
+.fp-img-wrap::before{content:'FEATURED';position:absolute;top:12px;left:12px;z-index:2;font-size:clamp(.34rem,.5vw,.44rem);letter-spacing:.35em;text-transform:uppercase;color:rgba(201,169,110,.55);background:rgba(6,6,6,.55);padding:3px 8px;font-weight:200;}
+.fp-content{display:flex;flex-direction:column;gap:clamp(18px,3vw,26px);}
+.fp-tag{display:flex;gap:6px;flex-wrap:wrap;}
+.fp-pill{font-size:clamp(.36rem,.52vw,.46rem);letter-spacing:.3em;text-transform:uppercase;color:var(--ch);border:1px solid var(--ch1);padding:4px 10px;font-weight:200;}
+.fp-price-area{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+.fp-price{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3.2vw,2.2rem);color:var(--w);font-weight:400;}
+.fp-price-note{font-size:clamp(.4rem,.58vw,.5rem);letter-spacing:.26em;text-transform:uppercase;color:var(--w3);font-weight:200;}
+.fp-attrs{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--ch1);}
+.fp-attr{background:var(--ink1);padding:clamp(11px,1.8vw,17px);}
+.fp-attr-k{font-size:clamp(.36rem,.52vw,.46rem);letter-spacing:.36em;text-transform:uppercase;color:var(--ch);font-weight:200;margin-bottom:3px;}
+.fp-attr-v{font-size:clamp(.58rem,.9vw,.7rem);color:var(--w5);font-weight:200;line-height:1.6;}
+
+/* spec strip */
+.spec-strip{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--ch1);}
+@media(min-width:500px){.spec-strip{grid-template-columns:repeat(4,1fr);}}
+.spec{padding:clamp(11px,1.8vw,18px);background:var(--ink1);display:flex;flex-direction:column;gap:4px;}
+.sk{font-size:clamp(.36rem,.52vw,.46rem);letter-spacing:.36em;text-transform:uppercase;color:var(--ch);font-weight:200;}
+.sv{font-family:'Playfair Display',serif;font-size:clamp(.74rem,1.35vw,.88rem);color:var(--w);font-weight:400;}
+
+/* ═════════════════════════════════════════════════
+   STUDIO COLOR — EXPLOSION SECTION
+   Full-bleed dramatic image with color explosion copy
+═════════════════════════════════════════════════ */
+.studio-color{
+  position:relative;
+  overflow:hidden;
+  min-height:clamp(420px,70vw,780px);
+  display:flex;align-items:center;
+}
+.sc-img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center center;
+  filter:brightness(.52) contrast(1.12) saturate(1.05);
+  transform:scale(1.04);
+}
+/* multi-layer overlay for drama */
+.sc-overlay{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(180deg,var(--ink) 0%,transparent 18%,transparent 75%,var(--ink) 100%),
+    linear-gradient(90deg,rgba(6,6,6,.75) 0%,rgba(6,6,6,.2) 50%,rgba(6,6,6,.6) 100%);
+}
+/* radial vignette for depth */
+.sc-vignette{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 90% 80% at 50% 50%,transparent 30%,rgba(6,6,6,.55) 100%);
+}
+/* horizontal color gradient hints at the palette */
+.sc-color-bar{
+  position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,
+    #f2d5c8 0%,   /* soft peach */
+    #e8b4a0 6%,   /* coral */
+    #d4899a 12%,  /* nude rose */
+    #c47a8a 18%,  /* dusty mauve */
+    #b56878 24%,  /* ballet */
+    #c07060 30%,  /* caramel */
+    #d44060 36%,  /* fuchsia */
+    #e82035 42%,  /* classic red */
+    #8b1a2e 48%,  /* wine */
+    #5c0a1e 54%,  /* black cherry */
+    #c8b4d8 60%,  /* lilac */
+    #1a3a8c 66%,  /* deep blue */
+    #0e6b5c 72%,  /* emerald */
+    #1a1a1a 78%,  /* near black */
+    #d4c8bc 90%,  /* nude */
+    #f0ece4 100%  /* ballet */
+  );
+  opacity:.7;
+}
+.sc-content{
+  position:relative;z-index:2;
+  padding:clamp(40px,7vw,90px) clamp(16px,5vw,64px);
+  display:flex;flex-direction:column;gap:clamp(16px,2.8vw,26px);
+  max-width:clamp(320px,70%,640px);
+}
+
+/* ═══════════════════════════
+   PRODUCT SYSTEM GRID
+═══════════════════════════ */
+.sys-section{
+  padding:clamp(48px,7vw,90px) clamp(16px,4vw,48px);
+  background:var(--ink);display:flex;flex-direction:column;gap:clamp(32px,5vw,48px);
+}
+.prod-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:1px;background:var(--ch1);
+}
+@media(min-width:640px){.prod-grid{grid-template-columns:repeat(3,1fr);}}
+.pc{background:var(--ink1);display:flex;flex-direction:column;overflow:hidden;}
+.pc-img{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--ink2);flex-shrink:0;}
+.pc-img img{width:100%;height:100%;object-fit:cover;object-position:center 18%;transition:transform .5s;}
+.pc:hover .pc-img img{transform:scale(1.04);}
+.pc-img::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,var(--ink1) 0%,rgba(13,13,13,.4) 22%,transparent 44%);pointer-events:none;}
+.pc-step{position:absolute;top:9px;left:9px;z-index:2;font-size:clamp(.34rem,.48vw,.44rem);letter-spacing:.3em;text-transform:uppercase;color:rgba(201,169,110,.55);background:rgba(6,6,6,.55);padding:3px 7px;font-weight:200;}
+.pc-body{padding:clamp(12px,2vw,20px) clamp(10px,1.8vw,18px);display:flex;flex-direction:column;gap:5px;border-top:1px solid var(--ch1);}
+.pc-lbl{font-size:clamp(.36rem,.52vw,.46rem);letter-spacing:.4em;text-transform:uppercase;color:var(--ch);font-weight:200;}
+.pc-name{font-family:'Playfair Display',serif;font-size:clamp(.84rem,1.6vw,1.02rem);color:var(--w);font-weight:400;line-height:1.2;}
+.pc-type{font-size:clamp(.38rem,.56vw,.48rem);letter-spacing:.2em;text-transform:uppercase;color:var(--w5);font-weight:200;}
+.pc-desc{font-size:clamp(.56rem,.88vw,.66rem);color:var(--w5);font-weight:200;line-height:1.8;letter-spacing:.03em;margin-top:2px;}
+.sys-foot{display:grid;grid-template-columns:1fr;gap:1px;background:var(--ch1);}
+@media(min-width:560px){.sys-foot{grid-template-columns:repeat(3,1fr);}}
+.sfi{padding:clamp(14px,2.5vw,24px) clamp(12px,2.2vw,22px);background:var(--ink);display:flex;flex-direction:column;gap:6px;}
+.sfik{font-size:clamp(.38rem,.58vw,.5rem);letter-spacing:.36em;text-transform:uppercase;color:var(--ch);font-weight:200;}
+.sfiv{font-size:clamp(.6rem,.98vw,.72rem);color:var(--w5);font-weight:200;line-height:1.75;letter-spacing:.03em;}
+
+/* ═══════════════════════════
+   CURATED BRANDS
+═══════════════════════════ */
+.brands-section{
+  padding:clamp(48px,7vw,90px) clamp(16px,4vw,48px);
+  background:var(--ink1);display:flex;flex-direction:column;gap:clamp(32px,5vw,48px);
+}
+.brand-cards{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--ch1);
+}
+@media(min-width:640px){.brand-cards{grid-template-columns:repeat(4,1fr);}}
+.brand-card{
+  background:var(--ink1);
+  padding:clamp(18px,3vw,32px) clamp(14px,2.5vw,24px);
+  display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:background .22s;
+}
+.brand-card:hover{background:var(--ink2);}
+.brand-logo-area{
+  width:100%;aspect-ratio:3/1;border:1px solid var(--w05);
+  display:flex;align-items:center;justify-content:center;
+  background:var(--ink2);margin-bottom:4px;
+}
+.brand-logo-txt{font-family:'Jost',sans-serif;font-size:clamp(.5rem,.85vw,.68rem);font-weight:300;letter-spacing:.4em;text-transform:uppercase;color:var(--w3);}
+.brand-nm{font-family:'Playfair Display',serif;font-size:clamp(.8rem,1.5vw,.94rem);color:var(--w);font-weight:400;}
+.brand-cat{font-size:clamp(.36rem,.52vw,.46rem);letter-spacing:.28em;text-transform:uppercase;color:var(--ch);font-weight:200;}
+.brand-desc{font-size:clamp(.56rem,.88vw,.66rem);color:var(--w5);font-weight:200;line-height:1.75;letter-spacing:.03em;}
+
+/* ═══════════════════════════
+   EDITORIAL BREAK
+═══════════════════════════ */
+.editorial-break{
+  position:relative;overflow:hidden;
+  min-height:clamp(420px,68vw,760px);
+  display:flex;align-items:center;
+  background:radial-gradient(ellipse 70% 80% at 65% 50%,rgba(40,32,24,.5) 0%,var(--ink) 70%);
+}
+.eb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center center;filter:brightness(.62) contrast(1.05) saturate(.88);}
+.eb-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,6,6,.88) 0%,rgba(6,6,6,.35) 60%,rgba(6,6,6,.15) 100%);}
+.eb-content{position:relative;z-index:2;padding:clamp(36px,7vw,88px) clamp(16px,5vw,64px);max-width:clamp(300px,60%,560px);display:flex;flex-direction:column;gap:clamp(14px,2.5vw,22px);}
+
+/* ═══════════════════════════
+   PRO / WHOLESALE ACCESS
+═══════════════════════════ */
+.pro-section{
+  padding:clamp(48px,7vw,90px) clamp(16px,4vw,48px);
+  background:var(--ink);display:flex;flex-direction:column;gap:clamp(32px,5vw,48px);
+}
+.pro-cards{
+  display:grid;grid-template-columns:1fr;gap:1px;background:var(--ch1);
+}
+@media(min-width:560px){.pro-cards{grid-template-columns:repeat(3,1fr);}}
+.pro-card{background:var(--ink1);padding:clamp(22px,3.8vw,40px) clamp(16px,3vw,28px);display:flex;flex-direction:column;gap:11px;position:relative;overflow:hidden;}
+.pro-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--ch),transparent);}
+.pro-card-nm{font-family:'Playfair Display',serif;font-size:clamp(.88rem,1.7vw,1.06rem);color:var(--w);font-weight:400;}
+.pro-card-dc{font-size:clamp(.58rem,.92vw,.7rem);color:var(--w5);font-weight:200;line-height:1.85;letter-spacing:.03em;}
+
+/* ═══════════════════════════
+   EDUCATION
+═══════════════════════════ */
+.edu-section{
+  padding:clamp(44px,6.5vw,82px) clamp(16px,4vw,48px);
+  background:var(--ink2);display:flex;flex-direction:column;gap:clamp(28px,4.5vw,44px);
+}
+.edu-cards{
+  display:grid;grid-template-columns:1fr;gap:1px;background:var(--w02);
+}
+@media(min-width:560px){.edu-cards{grid-template-columns:repeat(3,1fr);}}
+.edu-card{background:var(--ink2);padding:clamp(20px,3.5vw,34px) clamp(16px,3vw,28px);display:flex;flex-direction:column;gap:9px;}
+.edu-tag{font-size:clamp(.36rem,.52vw,.46rem);letter-spacing:.36em;text-transform:uppercase;color:var(--ch);font-weight:200;}
+.edu-title{font-family:'Playfair Display',serif;font-size:clamp(.84rem,1.6vw,1rem);color:var(--w);font-weight:400;line-height:1.25;}
+.edu-desc{font-size:clamp(.56rem,.88vw,.66rem);color:var(--w5);font-weight:200;line-height:1.8;letter-spacing:.03em;}
+.edu-link{font-size:clamp(.38rem,.55vw,.48rem);letter-spacing:.33em;text-transform:uppercase;color:var(--ch);font-weight:200;margin-top:2px;}
+
+/* ═══════════════════════════
+   GLANCE RARE WAY
+═══════════════════════════ */
+.grw-section{
+  padding:clamp(48px,7vw,90px) clamp(16px,4vw,48px);
+  background:var(--ink);display:flex;flex-direction:column;gap:clamp(32px,5vw,48px);
+}
+.grw-split{
+  display:flex;flex-direction:column;gap:clamp(24px,4vw,44px);
+}
+@media(min-width:660px){
+  .grw-split{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:clamp(28px,5vw,60px);}
+}
+.grw-img{position:relative;overflow:hidden;border:1px solid var(--ch1);min-height:clamp(220px,40vw,460px);}
+.grw-img img{width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(.9) contrast(1.04);}
+.grw-img::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,var(--ink) 0%,transparent 18%,transparent 84%,var(--ink) 100%);}
+.grw-img::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;z-index:2;background:linear-gradient(90deg,transparent,var(--ch),transparent);}
+.grw-copy{display:flex;flex-direction:column;gap:clamp(14px,2.5vw,22px);}
+.grw-prods{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--ch1);margin-top:4px;}
+.grwp{background:var(--ink1);padding:clamp(12px,2.2vw,20px) clamp(10px,1.8vw,16px);display:flex;flex-direction:column;gap:5px;}
+.grwp-rule{width:14px;height:1px;background:linear-gradient(90deg,var(--ch),transparent);opacity:.45;}
+.grwp-nm{font-family:'Playfair Display',serif;font-size:clamp(.76rem,1.42vw,.9rem);color:var(--w);font-weight:400;}
+.grwp-dc{font-size:clamp(.54rem,.86vw,.64rem);color:var(--w5);font-weight:200;line-height:1.75;letter-spacing:.03em;}
+
+/* ═══════════════════════════
+   FOOTER CTA
+═══════════════════════════ */
+.footer-cta{
+  padding:clamp(56px,8vw,100px) clamp(16px,4vw,48px);
+  background:var(--ink1);
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  gap:clamp(18px,3vw,28px);
+}
+.footer-bar{
+  padding:clamp(14px,2.2vw,22px) clamp(16px,4vw,48px);
+  background:var(--ink);border-top:1px solid var(--w02);
+  display:flex;flex-direction:column;gap:10px;align-items:center;
+}
+@media(min-width:560px){.footer-bar{flex-direction:row;justify-content:space-between;}}
+.footer-links{display:flex;gap:clamp(12px,2vw,24px);flex-wrap:wrap;justify-content:center;}
+.footer-links span{font-size:clamp(.34rem,.48vw,.44rem);letter-spacing:.26em;text-transform:uppercase;color:var(--w3);font-weight:200;}
+
+.prot-bar{padding:clamp(14px,2.5vw,24px) clamp(16px,3vw,30px);border:1px solid var(--ch1);background:var(--ch0);display:flex;gap:12px;align-items:flex-start;}
+.pb-v{width:1px;min-height:34px;background:var(--ch);opacity:.2;flex-shrink:0;margin-top:2px;}
+.pb-t{font-size:clamp(.54rem,.86vw,.66rem);color:var(--w3);font-weight:200;line-height:1.9;letter-spacing:.03em;}
+
+@media print{.pg{page-break-after:always;}body{background:#060606;}}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     PAGE 1 — HOMEPAGE (mobile-first)
+═══════════════════════════════════════ -->
+<div class="pg" style="min-height:auto;">
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-msg">Free shipping on professional orders over $150 &nbsp;·&nbsp; Pro accounts — 20% off storewide</div>
+</div>
+
+<!-- NAV -->
+<div class="sitenav">
+  <div class="nav-links">
+    <span>Shop</span><span>Brands</span><span>LAKAPRI Pro</span><span>Education</span><span>Wholesale</span>
+  </div>
+  <div class="lakapri-name-nav" style="font-size:clamp(.7rem,1vw,.84rem);position:absolute;left:50%;transform:translateX(-50%);">LAKAPRI</div>
+  <div class="nav-right">
+    <span style="font-size:12px;color:var(--w3);">🔍</span>
+    <span style="font-size:12px;color:var(--w3);">♡</span>
+    <span style="font-size:12px;color:var(--w3);">◻</span>
+    <button class="btn-p" style="padding:7px 14px;font-size:clamp(.36rem,.52vw,.46rem);">Pro Access</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-copy">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:4px;height:4px;border-radius:50%;background:var(--ch);"></div>
+      <div class="t-lbl" style="color:rgba(201,169,110,.55);">Professional Beauty Supply</div>
+    </div>
+    <div class="dp" style="font-size:clamp(2.2rem,6.5vw,4.8rem);max-width:520px;">
+      Where professionals<br>shop for beauty.
+    </div>
+    <div class="lhl" style="width:42px;"></div>
+    <p class="body" style="max-width:380px;font-size:clamp(.74rem,1.25vw,.94rem);">
+      LAKAPRI is the professional beauty supply destination for nail technicians, salon owners, and beauty professionals. Curated brands, clean formulas, luxury presentation.
+    </p>
+    <p class="body" style="max-width:360px;font-size:clamp(.64rem,1vw,.76rem);color:var(--w3);">
+      Including LAKAPRI Professional — our own private-label nail system.
+    </p>
+    <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:4px;">
+      <button class="btn-p">Shop Now</button>
+      <button class="btn-g">Apply for Pro Access</button>
+    </div>
+    <div class="t-micro" style="margin-top:4px;opacity:.28;">Sample copy — final messaging post-approval</div>
+  </div>
+  <div class="hero-img">
+    <img src="img-1.png" alt="LAKAPRI Professional — beauty campaign">
+  </div>
+</section>
+
+<!-- SHOP BY CATEGORY — text only, no icons -->
+<section class="cat-strip">
+  <div>
+    <div class="t-lbl" style="margin-bottom:8px;">Browse the Store</div>
+    <div class="dp" style="font-size:clamp(1.5rem,3.8vw,2.4rem);">Shop by category</div>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-item"><div class="cat-num">01</div><div class="cat-nm">Gel Polish</div><div class="cat-arrow">→</div></div>
+    <div class="cat-item"><div class="cat-num">02</div><div class="cat-nm">Builder Gel</div><div class="cat-arrow">→</div></div>
+    <div class="cat-item"><div class="cat-num">03</div><div class="cat-nm">Base &amp; Top Coats</div><div class="cat-arrow">→</div></div>
+    <div class="cat-item"><div class="cat-num">04</div><div class="cat-nm">Nail Care</div><div class="cat-arrow">→</div></div>
+    <div class="cat-item"><div class="cat-num">05</div><div class="cat-nm">Tools &amp; Supplies</div><div class="cat-arrow">→</div></div>
+    <div class="cat-item"><div class="cat-num">06</div><div class="cat-nm">All Brands</div><div class="cat-arrow">→</div></div>
+  </div>
+</section>
+
+<!-- LAKAPRI PROFESSIONAL PRIVATE LABEL -->
+<section class="plf">
+  <div class="plf-img">
+    <img src="img-2.png" alt="LAKAPRI Foundation — Base Coat">
+  </div>
+  <div class="plf-copy">
+    <div class="private-badge">
+      <div class="private-badge-dot"></div>
+      <div class="private-badge-txt">Our Private Label Line</div>
+    </div>
+    <div>
+      <div class="t-lbl" style="margin-bottom:9px;">LAKAPRI Professional Nail System</div>
+      <div class="dp" style="font-size:clamp(1.7rem,4.2vw,3rem);">Clean-performance<br>formulas for the<br>modern professional.</div>
+    </div>
+    <div class="lhl" style="width:36px;margin:2px 0;"></div>
+    <p class="body" style="max-width:340px;">Our own professional nail system — developed for technicians who refuse to compromise on formula integrity, packaging quality, or professional results.</p>
+    <div style="display:flex;flex-direction:column;gap:clamp(10px,2vw,16px);margin-top:2px;">
+      <div class="detail-row"><div class="dr-k">Formula</div><div class="dr-v">HEMA-Free &amp; TPO-Free</div><div class="dr-d">Cleaner, safer, more progressive formulas across the full system.</div></div>
+      <div class="detail-row"><div class="dr-k">Packaging</div><div class="dr-v">Matte white — minimal, luxury</div><div class="dr-d">Soft-touch bottles with platinum foil detail and clean typography.</div></div>
+    </div>
+    <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:6px;">
+      <button class="btn-p">Shop LAKAPRI Professional</button>
+      <button class="btn-g">Learn More</button>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCT: FOUNDATION -->
+<section class="featured">
+  <div>
+    <div class="t-lbl" style="margin-bottom:9px;">Featured Product</div>
+    <div class="dp" style="font-size:clamp(1.6rem,4vw,2.6rem);">LAKAPRI Foundation</div>
+  </div>
+  <div class="fp-main">
+    <div class="fp-img-wrap">
+      <img src="img-3.png" alt="LAKAPRI Foundation Base Coat">
+    </div>
+    <div class="fp-content">
+      <div class="t-lbl">LAKAPRI Professional</div>
+      <div class="dp" style="font-size:clamp(1.4rem,3.5vw,2.4rem);">The foundation<br>behind every<br>flawless set.</div>
+      <div class="lhl" style="width:34px;"></div>
+      <p class="body" style="max-width:420px;">A HEMA-Free &amp; TPO-Free base coat engineered for professional use. Superior adhesion, longer wear, and the cleaner formula that modern salons demand.</p>
+      <div class="fp-tag">
+        <div class="fp-pill">HEMA-Free</div>
+        <div class="fp-pill">TPO-Free</div>
+        <div class="fp-pill">Vegan</div>
+        <div class="fp-pill">Cruelty-Free</div>
+        <div class="fp-pill">Clean Formula</div>
+      </div>
+      <div class="fp-price-area">
+        <div class="fp-price">$34</div>
+        <div class="fp-price-note">/ 15ml Professional Size</div>
+      </div>
+      <div class="fp-attrs">
+        <div class="fp-attr"><div class="fp-attr-k">Adhesion</div><div class="fp-attr-v">Superior professional-grade bond</div></div>
+        <div class="fp-attr"><div class="fp-attr-k">Wear Time</div><div class="fp-attr-v">Up to 4+ weeks with proper application</div></div>
+        <div class="fp-attr"><div class="fp-attr-k">System</div><div class="fp-attr-v">Compatible with all gel systems</div></div>
+        <div class="fp-attr"><div class="fp-attr-k">Use</div><div class="fp-attr-v">Professional environments only</div></div>
+      </div>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;">
+        <button class="btn-p">Add to Cart</button>
+        <button class="btn-g">View Full Product</button>
+        <button class="btn-w">♡ Wishlist</button>
+      </div>
+      <div class="t-micro" style="opacity:.26;">Pricing and availability — placeholder only.</div>
+    </div>
+  </div>
+  <div class="spec-strip">
+    <div class="spec"><div class="sk">Bottle</div><div class="sv">Matte soft-touch</div></div>
+    <div class="spec"><div class="sk">Box</div><div class="sv">Soft-touch lamination</div></div>
+    <div class="spec"><div class="sk">Detail</div><div class="sv">Platinum foil</div></div>
+    <div class="spec"><div class="sk">Cap</div><div class="sv">Cylinder matte white</div></div>
+  </div>
+</section>
+
+</div><!-- /pg1 -->
+
+
+<!-- ═══════════════════════════════════════
+     PAGE 2 — STUDIO COLOR + SYSTEM + REST
+═══════════════════════════════════════ -->
+<div class="pg" style="min-height:auto;">
+
+<!-- ════════════════════════════════════════════
+     STUDIO COLOR — EXPLOSION SECTION
+     Full-bleed, dramatic, color-world immersive
+════════════════════════════════════════════ -->
+<section class="studio-color">
+  <img class="sc-img" src="img-4.png" alt="LAKAPRI Studio Color — 200+ professional shades">
+  <div class="sc-overlay"></div>
+  <div class="sc-vignette"></div>
+  <div class="sc-color-bar"></div>
+
+  <div class="sc-content">
+    <div class="t-lbl" style="color:rgba(201,169,110,.5);">Studio Color &nbsp;·&nbsp; Gel Polish</div>
+    <div class="dp" style="font-size:clamp(2rem,5.5vw,4rem);line-height:1.04;">
+      One formula.<br>Endless creativity.
+    </div>
+    <div class="lhl" style="width:40px;"></div>
+    <p class="body" style="max-width:400px;font-size:clamp(.72rem,1.18vw,.9rem);">
+      Over 200 professional shades engineered with the same high-performance foundation. Because consistency is the true luxury.
+    </p>
+    <!-- Color swatch row — visual hint of the palette -->
+    <div style="display:flex;gap:5px;flex-wrap:wrap;margin:6px 0;">
+      <div style="width:20px;height:20px;border-radius:50%;background:#f2d5c8;box-shadow:0 0 0 1px rgba(255,255,255,.15);"></div>
+      <div style="width:20px;height:20px;border-radius:50%;background:#e8b4a0;box-shadow:0 0 0 1px rgba(255,255,255,.15);"></div>
+      <div style="width:20px;height:20px;border-radius:50%;background:#d4899a;box-shadow:0 0 0 1px rgba(255,255,255,.15);"></div>
+      <div style="width:20px;height:20px;border-radius:50%;background:#c07060;box-shadow:0 0 0 1px rgba(255,255,255,.15);"></div>
+      <div style="width:20px;height:20px;border-radius:50%;background:#e82035;box-shadow:0 0 0 1px rgba(255,255,255,.15);"></div>
+      <div style="width:20px;height:20px;border-radius:50%;background:#8b1a2e;box-shadow:0 0 0 1px rgba(255,255,255,.15);"></div>
+      <div style="width:20px;height:20px;border-radius:50%;background:#5c0a1e;box-shadow:0 0 0 1px rgba(255,255,255,.15);"></div>
+      <div style="width:20px;height:20px;border-radius:50%;background:#c8b4d8;box-shadow:0 0 0 1px rgba(255,255,255,.15);"></div>
+      <div style="width:20px;height:20px;border-radius:50%;background:#d44060;box-shadow:0 0 0 1px rgba(255,255,255,.15);"></div>
+      <div style="width:20px;height:20px;border-radius:50%;background:#1a3a8c;box-shadow:0 0 0 1px rgba(255,255,255,.15);"></div>
+      <div style="width:20px;height:20px;border-radius:50%;background:#0e6b5c;box-shadow:0 0 0 1px rgba(255,255,255,.15);"></div>
+      <div style="width:20px;height:20px;border-radius:50%;background:#1a1a1a;box-shadow:0 0 0 1px rgba(255,255,255,.12);"></div>
+      <div style="width:20px;height:20px;border-radius:50%;background:#f0ece4;box-shadow:0 0 0 1px rgba(255,255,255,.15);"></div>
+    </div>
+    <div style="font-size:clamp(.38rem,.55vw,.48rem);letter-spacing:.35em;text-transform:uppercase;color:rgba(245,242,238,.3);font-weight:200;margin-top:-2px;">Ballet · Nude Rose · Dusty Mauve · Coral · Fuchsia · Classic Red · Wine · Lilac · Deep Blue · Emerald · Black Cherry + more</div>
+    <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:4px;">
+      <button class="btn-p">Shop Colors</button>
+      <button class="btn-g">View Color Collection</button>
+    </div>
+  </div>
+</section>
+
+<!-- LAKAPRI PROFESSIONAL SYSTEM: 6 products -->
+<section class="sys-section">
+  <div>
+    <div class="t-lbl" style="margin-bottom:10px;">LAKAPRI Professional System</div>
+    <div class="dp" style="font-size:clamp(1.7rem,4.5vw,3rem);">One system.<br>Every stage.</div>
+    <p class="body" style="max-width:540px;margin-top:clamp(10px,1.8vw,16px);">Every product shares the same DNA — cleaner formulas, luxury presentation, professional-grade performance from base coat to cuticle repair.</p>
+  </div>
+  <div class="prod-grid">
+    <div class="pc">
+      <div class="pc-img"><div class="pc-step">01 — Foundation</div><img src="img-5.png" alt="Foundation Base Coat"></div>
+      <div class="pc-body"><div class="pc-lbl">Foundation</div><div class="pc-name">Base Coat</div><div class="pc-type">HEMA-Free · TPO-Free</div><p class="pc-desc">The cleaner foundation for every professional gel system.</p></div>
+    </div>
+    <div class="pc">
+      <div class="pc-img"><div class="pc-step">02 — Architect</div><img src="img-6.png" alt="Architect Hard Builder Gel" style="object-position:center 35%;"></div>
+      <div class="pc-body"><div class="pc-lbl">Architect</div><div class="pc-name">Hard Builder Gel</div><div class="pc-type">Structure · Extension</div><p class="pc-desc">Professional-grade hard gel for structure and strength.</p></div>
+    </div>
+    <div class="pc">
+      <div class="pc-img"><div class="pc-step">03 — Studio Color</div><img src="img-7.png" alt="Studio Color Gel Polish" style="object-position:center 20%;"></div>
+      <div class="pc-body"><div class="pc-lbl">Studio Color</div><div class="pc-name">Gel Polish</div><div class="pc-type">200+ Shades · HEMA-Free</div><p class="pc-desc">Rich color in a professional gel formula. Luxury finish, every application.</p></div>
+    </div>
+    <div class="pc">
+      <div class="pc-img"><div class="pc-step">04 — Veil</div><img src="img-8.png" alt="Veil Top Coat" style="object-position:center 20%;"></div>
+      <div class="pc-body"><div class="pc-lbl">Veil</div><div class="pc-name">Top Coat</div><div class="pc-type">Sealing · Mirror Gloss</div><p class="pc-desc">Locks color, adds mirror gloss, extends the life of every service.</p></div>
+    </div>
+    <div class="pc">
+      <div class="pc-img"><div class="pc-step">Renew</div><img src="img-9.png" alt="Renew Natural Nail Repair System" style="object-position:center 20%;"></div>
+      <div class="pc-body"><div class="pc-lbl">Renew</div><div class="pc-name">Natural Nail Repair</div><div class="pc-type">Strengthening · Restorative</div><p class="pc-desc">Strengthens and rebuilds the natural nail structure from within.</p></div>
+    </div>
+    <div class="pc">
+      <div class="pc-img"><div class="pc-step">Restore</div><img src="img-10.png" alt="Restore Cuticle Repair Oil" style="object-position:center 15%;"></div>
+      <div class="pc-body"><div class="pc-lbl">Restore</div><div class="pc-name">Cuticle Repair Oil</div><div class="pc-type">Precision Pen · Clean Formula</div><p class="pc-desc">Precision-applicator cuticle oil. The finishing touch every service deserves.</p></div>
+    </div>
+  </div>
+  <div style="text-align:center;"><button class="btn-p">Shop Full System</button></div>
+  <div class="sys-foot">
+    <div class="sfi"><div class="sfik">Designed For</div><div class="sfiv">Nail technicians, salon owners, nail educators &amp; beauty professionals.</div></div>
+    <div class="sfi"><div class="sfik">Formula Standard</div><div class="sfiv">HEMA-Free · TPO-Free · Vegan · Cruelty-Free.</div></div>
+    <div class="sfi"><div class="sfik">Availability</div><div class="sfiv">Individual purchase and professional/wholesale accounts.</div></div>
+  </div>
+</section>
+
+<!-- CURATED BRANDS -->
+<section class="brands-section">
+  <div>
+    <div class="t-lbl" style="margin-bottom:9px;">Curated for Professionals</div>
+    <div class="dp" style="font-size:clamp(1.6rem,4vw,2.8rem);">We also carry the best<br>professional nail brands.</div>
+    <p class="body" style="max-width:440px;margin-top:clamp(10px,1.8vw,16px);">Beyond our own line, LAKAPRI stocks the professional brands that nail technicians and salon owners actually use — curated for quality, performance, and professional trust.</p>
+  </div>
+  <div class="brand-cards">
+    <div class="brand-card">
+      <div class="brand-logo-area"><div class="brand-logo-txt">Brand Partner A</div></div>
+      <div class="brand-nm">Professional Brand</div>
+      <div class="brand-cat">Gel Systems · Tools</div>
+      <p class="brand-desc">Premium gel system trusted by educators and competition-level technicians worldwide.</p>
+    </div>
+    <div class="brand-card">
+      <div class="brand-logo-area"><div class="brand-logo-txt">Brand Partner B</div></div>
+      <div class="brand-nm">Professional Brand</div>
+      <div class="brand-cat">Nail Art · Accessories</div>
+      <p class="brand-desc">Precision nail art tools and professional accessories for editorial-level work.</p>
+    </div>
+    <div class="brand-card">
+      <div class="brand-logo-area"><div class="brand-logo-txt">Brand Partner C</div></div>
+      <div class="brand-nm">Professional Brand</div>
+      <div class="brand-cat">Nail Care · Treatments</div>
+      <p class="brand-desc">Advanced nail care treatments and professional-strength formulas for natural nail restoration.</p>
+    </div>
+    <div class="brand-card">
+      <div class="brand-logo-area"><div class="brand-logo-txt">Brand Partner D</div></div>
+      <div class="brand-nm">Professional Brand</div>
+      <div class="brand-cat">Supplies · Equipment</div>
+      <p class="brand-desc">Professional salon supplies, UV/LED lamps, and technical equipment for quality-focused salons.</p>
+    </div>
+  </div>
+  <div class="prot-bar">
+    <div class="pb-v"></div>
+    <p class="pb-t"><strong style="color:var(--ch2);font-weight:300;">Curated brand section — concept preview.</strong> Partner brands, logos, and listings will be developed after project approval. LAKAPRI will carry a curated selection of professional nail and beauty supply brands.</p>
+  </div>
+</section>
+
+<!-- EDITORIAL BREAK -->
+<section class="editorial-break">
+  <img class="eb-img" src="img-11.png" alt="LAKAPRI Veil — luxury splash campaign">
+  <div class="eb-overlay" style="background:linear-gradient(90deg,rgba(6,6,6,.82) 0%,rgba(6,6,6,.45) 50%,rgba(6,6,6,.2) 100%);"></div>
+  <div class="eb-content">
+    <div class="t-lbl" style="color:rgba(201,169,110,.45);">The LAKAPRI Ritual</div>
+    <div class="dp" style="font-size:clamp(1.7rem,4.5vw,3.2rem);">A nail system built<br>for the beauty ritual.</div>
+    <div class="lhl" style="width:34px;"></div>
+    <p class="body" style="max-width:330px;">LAKAPRI was created for professionals who understand that the product experience is as important as the result. Every formula. Every finish. Every detail — considered.</p>
+    <div><button class="btn-g">Explore the Full System</button></div>
+  </div>
+</section>
+
+<!-- PRO / WHOLESALE ACCESS -->
+<section class="pro-section">
+  <div>
+    <div class="t-lbl" style="margin-bottom:9px;">Professional &amp; Wholesale Access</div>
+    <div class="dp" style="font-size:clamp(1.7rem,4.5vw,3.2rem);max-width:620px;">Built for salons.<br>Scaled for businesses.</div>
+    <p class="body" style="max-width:480px;margin-top:clamp(10px,1.8vw,16px);">Professional pricing and wholesale access for salons, spas, nail educators, and distributors. Apply once — shop always at professional rates.</p>
+  </div>
+  <div class="pro-cards">
+    <div class="pro-card">
+      <div class="pro-card-nm">Salon &amp; Studio Access</div>
+      <p class="pro-card-dc">Professional pricing for salons, spas, and nail studios. Unlock wholesale rates, exclusive products, and priority fulfillment after a simple application.</p>
+      <div style="margin-top:2px;"><button class="btn-p" style="font-size:clamp(.38rem,.56vw,.48rem);padding:9px 16px;">Request Wholesale Access</button></div>
+    </div>
+    <div class="pro-card">
+      <div class="pro-card-nm">Nail Educator Access</div>
+      <p class="pro-card-dc">Partner with LAKAPRI to bring cleaner, more professional systems to your students. Apply for educator pricing and co-branded materials.</p>
+      <div style="margin-top:2px;"><button class="btn-g" style="font-size:clamp(.38rem,.56vw,.48rem);padding:9px 16px;">Apply for Educator Access</button></div>
+    </div>
+    <div class="pro-card">
+      <div class="pro-card-nm">Distribution Partners</div>
+      <p class="pro-card-dc">We partner with professional beauty distributors who share our standard of quality. Inquire about territorial distribution opportunities.</p>
+      <div style="margin-top:2px;"><button class="btn-g" style="font-size:clamp(.38rem,.56vw,.48hem);padding:9px 16px;">Inquire About Distribution</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="edu-section">
+  <div>
+    <div class="t-lbl" style="margin-bottom:8px;">Education &amp; Resources</div>
+    <div class="dp" style="font-size:clamp(1.5rem,3.8vw,2.4rem);">Knowledge for the professional.</div>
+  </div>
+  <div class="edu-cards">
+    <div class="edu-card">
+      <div class="edu-tag">System Guide</div>
+      <div class="edu-title">How to use the LAKAPRI Professional Nail System</div>
+      <p class="edu-desc">Step-by-step application guide for Foundation, Architect, Studio Color, and Veil. Prep, cure times, and finishing techniques.</p>
+      <div class="edu-link">Read Guide →</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-tag">Formula Education</div>
+      <div class="edu-title">Why HEMA-Free &amp; TPO-Free matters for your salon</div>
+      <p class="edu-desc">Understanding the science behind cleaner nail formulas — what they remove, why it matters, and how it protects technicians and clients.</p>
+      <div class="edu-link">Read Article →</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-tag">Pro Tips</div>
+      <div class="edu-title">Adhesion, longevity, and getting the most from your base coat</div>
+      <p class="edu-desc">Professional best practices for nail prep and base coat application that maximize wear time and reduce lifting across all gel systems.</p>
+      <div class="edu-link">Read Tips →</div>
+    </div>
+  </div>
+  <div class="prot-bar">
+    <div class="pb-v"></div>
+    <p class="pb-t"><strong style="color:var(--ch2);font-weight:300;">Education section — concept preview.</strong> Full editorial content, articles, video guides, and professional resources will be developed as part of the full project scope. Post-approval only.</p>
+  </div>
+</section>
+
+<!-- GLANCE RARE WAY -->
+<section class="grw-section">
+  <div style="display:flex;align-items:center;gap:clamp(12px,2.2vw,20px);">
+    <div class="lhl" style="width:22px;flex-shrink:0;"></div>
+    <div>
+      <div class="t-micro" style="margin-bottom:5px;opacity:.32;">Also available at LAKAPRI</div>
+      <div style="display:flex;align-items:center;gap:clamp(10px,1.8vw,18px);flex-wrap:wrap;">
+        <div class="lakapri-name-nav" style="font-size:clamp(.58rem,.85vw,.72rem);">LAKAPRI</div>
+        <div class="lv" style="height:11px;opacity:.28;"></div>
+        <div class="lakapri-name-nav" style="font-size:clamp(.58rem,.85vw,.72rem);color:var(--ch2);">Glance Rare Way</div>
+      </div>
+    </div>
+  </div>
+  <div class="grw-split">
+    <div class="grw-img">
+      <img src="img-12.png" alt="Glance Rare Way — Glance Henna professional eyebrow system">
+    </div>
+    <div class="grw-copy">
+      <div>
+        <div class="t-lbl" style="margin-bottom:8px;">Professional Eyebrow System</div>
+        <div class="dp" style="font-size:clamp(1.8rem,4.8vw,3.4rem);line-height:1.05;">Glance<br>Rare Way</div>
+      </div>
+      <div class="lhl" style="width:34px;"></div>
+      <p class="body" style="max-width:360px;">The professional henna eyebrow system for technicians who demand precision, longevity, and a result that looks effortlessly natural. Available exclusively at LAKAPRI.</p>
+      <div style="padding:clamp(12px,2.2vw,20px) clamp(13px,2.5vw,24px);border:1px solid var(--ch1);background:var(--ch0);display:flex;flex-direction:column;gap:6px;max-width:320px;">
+        <div class="t-lbl" style="font-size:clamp(.36rem,.52vw,.46rem);">Glance Henna — Flagship Kit</div>
+        <div class="dp-up" style="font-size:clamp(.86rem,1.7vw,1.06rem);">Ultra Black · 3.5g + 20ml Fixador</div>
+        <p class="body" style="font-size:clamp(.54rem,.86vw,.66rem);color:var(--w3);">Henna 3.5g · Precision Paddle · Fixador 20ml. Professional eyebrow henna system.</p>
+      </div>
+      <div class="grw-prods">
+        <div class="grwp"><div class="grwp-rule"></div><div class="grwp-nm">Glance Henna</div><p class="grwp-dc">Long-lasting henna for brow hair and skin. Weeks of wear.</p></div>
+        <div class="grwp"><div class="grwp-rule"></div><div class="grwp-nm">Henna Fixador</div><p class="grwp-dc">Seals color and extends longevity post-application.</p></div>
+        <div class="grwp"><div class="grwp-rule"></div><div class="grwp-nm">Brow Definition Pen</div><p class="grwp-dc">Micro-stroke precision pen for professional brow architecture.</p></div>
+        <div class="grwp"><div class="grwp-rule"></div><div class="grwp-nm">Styling Gel</div><p class="grwp-dc">Professional lamination gel for the elevated brow service.</p></div>
+      </div>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:4px;">
+        <button class="btn-p">Shop Glance Rare Way</button>
+        <button class="btn-g">Request Pro Access</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="footer-cta">
+  <div class="lh" style="width:48px;margin:0 auto;opacity:.4;"></div>
+  <div class="dp" style="font-size:clamp(1.8rem,5vw,3.6rem);max-width:560px;">Your professional beauty supply. Elevated.</div>
+  <p class="body" style="max-width:420px;font-size:clamp(.7rem,1.1vw,.86rem);">LAKAPRI is the destination for professionals who want the best — curated brands, clean private-label formulas, and a luxury shopping experience built for the modern salon.</p>
+  <div style="display:flex;gap:9px;flex-wrap:wrap;justify-content:center;">
+    <button class="btn-p" style="font-size:clamp(.44rem,.66vw,.56rem);padding:clamp(12px,1.9vw,16px) clamp(24px,4vw,42px);">Shop Now</button>
+    <button class="btn-g" style="font-size:clamp(.42rem,.62vw,.54rem);">Apply for Wholesale Access</button>
+  </div>
+  <div style="margin-top:clamp(18px,3vw,28px);padding-top:clamp(16px,2.8vw,24px);border-top:1px solid var(--ch1);width:100%;display:flex;flex-direction:column;align-items:center;gap:10px;">
+    <div class="lakapri-name" style="font-size:clamp(1rem,2.4vw,1.6rem);">LAKAPRI</div>
+    <p style="font-family:'Jost',sans-serif;font-weight:200;font-size:clamp(.38rem,.56vw,.48rem);color:var(--w3);letter-spacing:.2em;text-align:center;">Professional Beauty Supply &nbsp;·&nbsp; LAKAPRI Professional Nail System &nbsp;·&nbsp; Glance Rare Way</p>
+  </div>
+</section>
+
+<!-- FOOTER BAR -->
+<div class="footer-bar">
+  <div class="t-micro" style="opacity:.28;">Concept preview only — not final artwork &nbsp;·&nbsp; 2025 LAKAPRI</div>
+  <div class="footer-links">
+    <span>Privacy</span><span>Terms</span><span>Wholesale</span><span>Pro Login</span><span>Contact</span>
+  </div>
+</div>
+
+</div><!-- /pg2 -->
+
+</body>
+</html>
